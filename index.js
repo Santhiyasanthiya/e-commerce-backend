@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config()
 
 const app = express();
-const PORT = 4000
+const PORT = 4000;
 
 
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(cors());
 mongoose.connect(
  process.env.MONGO_URL
 );
-
+console.log("Mongoose Connected Successfully")
 
 // API creation
 
@@ -267,6 +267,6 @@ app.post("/getcart", fetchUser, async (req, res) => {
   res.json(userData.cartData);
 });
 
-app.listen(PORT|| process.env.PORT, () => {
+app.listen(PORT || process.env.PORT, () => {
   console.log("Server running port on", PORT);
 });
