@@ -41,12 +41,12 @@ const upload = multer({ storage: storage });
 // creating upload endpoint
 app.use("/images", express.static("upload/images"));
 
-// app.post("/upload", upload.single("product"), (req, res) => {
-//   res.json({
-//     success: 1,
-//     image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
-//   });
-// });
+app.post("/upload", upload.single("product"), (req, res) => {
+  res.json({
+    success: 1,
+    image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
+  });
+});
 
 // Schema for creating products
 const Product = mongoose.model("Product", {
@@ -266,6 +266,7 @@ app.post("/getcart", fetchUser, async (req, res) => {
   let userData = await Users.findOne({ _id: req.user.id });
   res.json(userData.cartData);
 });
+
 
 app.listen(PORT || process.env.PORT, () => {
   console.log("Server running port on", PORT);
